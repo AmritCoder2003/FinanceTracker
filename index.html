@@ -5,19 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    
+
     <title>Personal Finance Tracker</title>
 </head>
 
+
 <body>
     <header>
+        <img class="logo" src="https://i.pinimg.com/564x/61/ea/07/61ea07e06fa139ef7e4609c95f0ae8ed.jpg">
         <h1>Personal Finance Tracker</h1>
+        <p id="currentDateTime"></p>
     </header>
 
     <main>
-        <section id="balanceSection">
-            <h2>Your Balance:</h2>
-            <div id="balanceAmount">0.00</div>
-        </section>
+        <nav id="balanceSection">
+            <div class="balance">
+                <h2>Your Balance:</h2>
+                <div id="balanceAmount">0.00</div>
+            </div>
+            <div class="balance">
+                <h2>Income:</h2>
+                <div id="incomeAmount">0.00</div>
+            </div>
+            <div class="balance">
+                <h2>Expense:</h2>
+                <div id="expenseAmount">0.00</div>
+            </div>
+        </nav>
 
         <section id="transactionSection">
             <h2>Add Transaction</h2>
@@ -46,9 +61,12 @@
             <ul id="transactionList"></ul>
             <p id="noTransactionMessage">No transactions yet.</p>
         </section>
+        <section id="bottom"></section>
+        
     </main>
 
     <script src="index.js"></script>
+    
 </body>
 
 </html>
