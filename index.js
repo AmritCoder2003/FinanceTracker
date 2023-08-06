@@ -12,7 +12,8 @@ const noTransactionMessage = document.getElementById("noTransactionMessage");
 let transactions = [];
 let incomes=0;
 let expenses=0;
-
+let totalIncome = 0;
+let totalExpense = 0;
 // Check if transactions data exists in Local Storage
 if (localStorage.getItem("transactions")) {
     transactions = JSON.parse(localStorage.getItem("transactions"));
@@ -24,15 +25,15 @@ function updateBalance() {
     const balance = transactions.reduce((acc, transaction) => {
       return transaction.type === "income" ? acc + transaction.amount : acc - transaction.amount;
     }, 0);
-  
+
     totalIncome = transactions.reduce((acc, transaction) => {
       return transaction.type === "income" ? acc + transaction.amount : acc;
     }, 0);
-  
+
     totalExpense = transactions.reduce((acc, transaction) => {
       return transaction.type === "expense" ? acc + transaction.amount : acc;
     }, 0);
-  
+
     balanceAmount.textContent = balance.toFixed(2);
     incomeAmount.textContent = totalIncome.toFixed(2);
     expenseAmount.textContent = totalExpense.toFixed(2);
@@ -52,8 +53,8 @@ function addTransaction(event) {
         amount,
         type
     };
-    
-    
+
+
     transactions.push(transaction);
     if(type==="income"){
         totalIncome+=amount;
@@ -83,7 +84,6 @@ function deleteTransaction(index) {
     updateTransactions();
     updateBalance();
     saveTransactions();
-    
 }
 
 // Function to save transactions to Local Storage
@@ -137,7 +137,6 @@ function editTransaction(index) {
             amount: updatedAmount,
             type: updatedType
           };
-      
           if (transaction.type === "income") {
             totalIncome -= transaction.amount;
             totalIncome += updatedAmount;
@@ -145,13 +144,11 @@ function editTransaction(index) {
             totalExpense -= transaction.amount;
             totalExpense += updatedAmount;
           }
-      
         transactions[index] = updatedTransaction;
         alert(`Transaction "${updatedTransaction.description}" updated successfully!`);
         updateTransactions();
         updateBalance();
         saveTransactions();
-        
     } else {
         alert("Invalid input! Please try again.");
     }
